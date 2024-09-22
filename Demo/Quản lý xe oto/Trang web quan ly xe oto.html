@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quản lý  xe Oto</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    table { width: 100%; border-collapse: collapse; margin-top: 2px; }
+    th, td { border: 1px solid #000; padding: 1px; text-align: left; }
+    th { background-color: #f2f2f2; }
+  </style>
+</head>
+<body>
+<h1>Danh Sách Xe Ô Tô</h1>
+<table id="carTable">
+  <tr>
+    <th>Tên Xe</th>
+    <th>Hãng</th>
+    <th>Năm Sản Xuất</th>
+  </tr>
+</table>
+<h2>Thêm Xe Mới</h2>
+<input type="text" id="carName" placeholder="Tên Xe">
+<input type="text" id="carBrand" placeholder="Hãng">
+<input type="number" id="carYear" placeholder="Năm Sản Xuất">
+<button onclick="addCar()">Thêm Xe</button>
+
+<script>
+  const cars = [];
+
+  function addCar() {
+    const name = document.getElementById('carName').value;
+    const brand = document.getElementById('carBrand').value;
+    const year = document.getElementById('carYear').value;
+
+    if (name && brand && year) {
+      const car = { name, brand, year };
+      cars.push(car);
+      displayCars();
+      clearInputs();
+    } else {
+      alert("Vui lòng điền đầy đủ thông tin!");
+    }
+  }
+
+  function displayCars() {
+    const table = document.getElementById('carTable');
+    table.innerHTML = `
+                <tr>
+                    <th>Tên Xe</th>
+                    <th>Hãng</th>
+                    <th>Năm Sản Xuất</th>
+                </tr>
+            `;
+    cars.forEach(car => {
+      const row = `<tr>
+                    <td>${car.name}</td>
+                    <td>${car.brand}</td>
+                    <td>${car.year}</td>
+                </tr>`;
+      table.innerHTML += row;
+    });
+  }
+
+  function clearInputs() {
+    document.getElementById('carName').value = '';
+    document.getElementById('carBrand').value = '';
+    document.getElementById('carYear').value = '';
+  }
+</script>
+</body>
+</html>
+
